@@ -10,15 +10,22 @@
       text-align: center;
     }
     input {
-      height: 36px;
       margin-right: 12px;
     }
-    
+    label,
+    input {
+      height: 36px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
   </style>
   <body>
     <form method="POST" action="/pretrazi">
       <label for="id">Adresa: </label>
-      <input type="text" name="id" placeholder="0x0000000000000000000000000000000000000000" />
+      <input
+        type="text"
+        name="id"
+        placeholder="0x0000000000000000000000000000000000000000"
+      />
       <input type="number" name="blok" placeholder="9000000" />
       <input type="submit" name="submit" value="Pretrazi transakcije" />
     </form>
