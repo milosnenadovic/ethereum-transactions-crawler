@@ -17,17 +17,17 @@ app.get("/", (req, res) => {
 app.post("/pretrazi", (req, res) => {
   const { id } = req.body;
   const { blok } = req.body;
-  try {
-    request(
-      {
-        uri: `https://etherscan.io/txs?a=${id}`,
-      },
-      async (error, response, body) => {
-        if (error) {
-          res.sendFile(path.join(__dirname, "index.html"));
-        }
-        let $ = cheerio.load(body);
 
+  request(
+    {
+      uri: `https://etherscan.io/txs?a=${id}`,
+    },
+    async (error, response, body) => {
+      if (error) {
+        res.sendFile(path.join(__dirname, "index.html"));
+      }
+      try {
+        let $ = cheerio.load(body);
         let last =
           $('nav[aria-label="page navigation"]')
             .find("ul > li")
@@ -110,11 +110,11 @@ app.post("/pretrazi", (req, res) => {
             });
           }
         }
+      } catch (error) {
+        console.log(error);
       }
-    );
-  } catch (error) {
-    console.log(error);
-  }
+    }
+  );
 });
 
 const PORT = process.env.PORT || 5000;
